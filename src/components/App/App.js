@@ -1,37 +1,66 @@
+import { useState } from 'react';
 import Button from '../Button';
 import Player from '../Player';
 import PlayerForm from '../PlayerForm';
 import './App.css';
 
 function App() {
+const [players, setPlayers] = useState([])
+
   return (
     <div className="App">
       <PlayerForm 
-        onAddPlayer={name => console.log(name)} 
+        onAddPlayer={addPlayer} 
         text={'Add Player:'}
       />
-      <Player 
-      name='John Doe' 
-      score='20' 
-      onMinus={() => console.log('Minus')} 
-      onPlus={() => console.log('Plus')}
-      />
-      <Player 
-      name='Jane Doe'
-      score='30'
-      onMinus={() => console.log('Minus')} 
-      onPlus={() => console.log('Plus')}
-      />
+      {players.map(({ name, score, id }, index) => (
+        <Player 
+        key={id}
+        name={name} 
+        score={score} 
+        onMinus={() => onMinus(index)} 
+        onPlus={() => onPlus(index)}
+        />
+      ))}
       <Button 
-      onClick={() => console.log('Reset scores')} 
+      onClick={resetScores} 
       text='Reset scores'
       />
       <Button 
-      onClick={() => console.log('Reset all')} 
+      onClick={resetAll} 
       text='Reset all'
       />
     </div>
-  );
+  )
+
+function onPlus(index) {
+  setPlayers(players => [
+    ...players.slice(0, index),
+    {...players[index], score: players[index].score + 1},
+    ...players.slice(index + 1),
+  ])
+}
+
+function onMinus(index) {
+  setPlayers(players => [
+    ...players.slice(0, index),
+    { ...players[index], score: players[index].score - 1 },
+    ...players.slice(index + 1),
+  ])
+}
+
+function addPlayer(name) {
+setPlayers([...players, {name, score: 0, id: players.lenght +1}])
+}
+
+function resetScores() {
+  setPlayers(players.map(player => ({ ...player, score: 0 })))
+}
+
+function resetAll() {
+  setPlayers([])
+}
+
 }
 
 export default App;
