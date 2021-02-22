@@ -1,0 +1,12 @@
+.Player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .Player__score {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+  }
