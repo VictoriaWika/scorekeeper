@@ -1,0 +1,16 @@
+.Navigation {
+  display: flex;
+  justify-content: space-evenly;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #eee;
+}
+
+.Navigation button {
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 10px;
+}

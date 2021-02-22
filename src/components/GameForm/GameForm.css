@@ -1,7 +1,7 @@
-.PlayerForm input {
+.GameForm input {
+  margin: 5px 0;
   border: 2px solid #bbb;
   width: 100%;
   font-size: inherit;
   font-family: inherit;
-  margin: 5px 0;
 }

@@ -1,6 +1,8 @@
 .Button {
-    padding: 5px;
-    background: #bbb;
+    background: #eee;
+    width: 250px;
+    margin: 0 auto;
     border: none;
+    padding: 5px;
     font-size: inherit;
-  }
+}
