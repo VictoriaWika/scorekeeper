@@ -1,11 +1,11 @@
 .Navigation {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
   background: #eee;
+  width: 100%;
 }
 
 .Navigation button {
@@ -13,4 +13,12 @@
   font-size: inherit;
   font-family: inherit;
   padding: 10px;
+}
+
+.Navigation__active {
+  background: hotpink;
+}
+
+.Navigation__inactive {
+  background: #eee;
 }
