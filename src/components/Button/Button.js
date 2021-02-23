@@ -1,9 +1,8 @@
-import './Button.css'
+import styled from 'styled-components/macro'
 
-export default function Button({text, onClick}) {
-    return (
-        <button className='Button' onClick={onClick}>
-            {text}
-        </button>
-    )
-}
+export default styled.button`
+  padding: 5px;
+  background: #eee;
+  border: none;
+  font-size: inherit;
+`

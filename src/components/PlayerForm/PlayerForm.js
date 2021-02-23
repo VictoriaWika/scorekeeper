@@ -1,21 +1,31 @@
-import './PlayerForm.css'
+import styled from 'styled-components'
 
-export default function PlayerForm({text, onAddPlayer}) {
-    return (
-        <form onSubmit={handleSubmit} className='PlayerForm'>
-            <label>
-                {text}
-                <input name="player" placeholder="Player name"/>
-            </label>
-        </form>
-    )
-    function handleSubmit(event) {
-        event.preventDefault()
-        const form = event.target
-        const input = form.elements.player
-        const name = input.value
-        onAddPlayer(name)
-        form.reset()
-        input.focus()
-      }
+export default function PlayerForm({ text, onAddPlayer }) {
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Label>
+        {text}
+        <Input name="player" placeholder="Player name" />
+      </Label>
+    </Form>
+  )
+  function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.target
+    const input = form.elements.player
+    const name = input.value
+    onAddPlayer(name)
+    form.reset()
+    input.focus()
+  }
 }
+
+const Form = styled.form``
+
+const Label = styled.label``
+
+const Input = styled.input`
+  border: 2px solid #bbb;
+  width: 100%;
+  font-size: inherit;
+`

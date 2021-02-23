@@ -1,66 +1,64 @@
-import { useState } from 'react';
-import Button from '../Button';
-import Player from '../Player';
-import PlayerForm from '../PlayerForm';
-import './App.css';
+import { useState } from 'react'
+import styled from 'styled-components'
+import Button from '../Button'
+import Player from '../Player'
+import PlayerForm from '../PlayerForm'
 
-function App() {
-const [players, setPlayers] = useState([])
+export default function App() {
+  const [players, setPlayers] = useState([])
 
   return (
-    <div className="App">
-      <PlayerForm 
-        onAddPlayer={addPlayer} 
-        text={'Add Player:'}
-      />
+    <StyledApp>
+      <PlayerForm onAddPlayer={addPlayer} text={'Add Player:'} />
       {players.map(({ name, score, id }, index) => (
-        <Player 
-        key={id}
-        name={name} 
-        score={score} 
-        onMinus={() => onMinus(index)} 
-        onPlus={() => onPlus(index)}
+        <Player
+          key={id}
+          name={name}
+          score={score}
+          onMinus={() => onMinus(index)}
+          onPlus={() => onPlus(index)}
         />
       ))}
-      <Button 
-      onClick={resetScores} 
-      text='Reset scores'
-      />
-      <Button 
-      onClick={resetAll} 
-      text='Reset all'
-      />
-    </div>
+      <Button onClick={resetScores}>Reset scores</Button>
+      <ResetButton onClick={resetAll}>Reset all</ResetButton>
+    </StyledApp>
   )
 
-function onPlus(index) {
-  setPlayers(players => [
-    ...players.slice(0, index),
-    {...players[index], score: players[index].score + 1},
-    ...players.slice(index + 1),
-  ])
+  function onPlus(index) {
+    setPlayers(players => [
+      ...players.slice(0, index),
+      { ...players[index], score: players[index].score + 1 },
+      ...players.slice(index + 1),
+    ])
+  }
+
+  function onMinus(index) {
+    setPlayers(players => [
+      ...players.slice(0, index),
+      { ...players[index], score: players[index].score - 1 },
+      ...players.slice(index + 1),
+    ])
+  }
+
+  function addPlayer(name) {
+    setPlayers([...players, { name, score: 0, id: players.lenght + 1 }])
+  }
+
+  function resetScores() {
+    setPlayers(players.map(player => ({ ...player, score: 0 })))
+  }
+
+  function resetAll() {
+    setPlayers([])
+  }
 }
 
-function onMinus(index) {
-  setPlayers(players => [
-    ...players.slice(0, index),
-    { ...players[index], score: players[index].score - 1 },
-    ...players.slice(index + 1),
-  ])
-}
-
-function addPlayer(name) {
-setPlayers([...players, {name, score: 0, id: players.lenght +1}])
-}
-
-function resetScores() {
-  setPlayers(players.map(player => ({ ...player, score: 0 })))
-}
-
-function resetAll() {
-  setPlayers([])
-}
-
-}
-
-export default App;
+const StyledApp = styled.div`
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+`
+const ResetButton = styled(Button)`
+  background: #333;
+  color: white;
+`
