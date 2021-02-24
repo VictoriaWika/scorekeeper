@@ -1,22 +1,15 @@
 import Button from './Button'
 import styled from 'styled-components/macro'
 
-export default function Navigation({ pages, activeIndex, onNavigate }) {
+export default function Navigation({ activeIndex, onNavigate }) {
   return (
     <Nav>
-      {pages.map((page, index) => (
-        <Button
-          key={page}
-          className={
-            index === activeIndex
-              ? 'Navigation__active'
-              : 'Navigation__inactive'
-          }
-          onClick={() => onNavigate(index)}
-        >
-          {page}
-        </Button>
-      ))}
+      <Button isActive={activeIndex === 0} onClick={() => onNavigate(0)}>
+        Play
+      </Button>
+      <Button isActive={activeIndex === 1} onClick={() => onNavigate(1)}>
+        History
+      </Button>
     </Nav>
   )
 }
@@ -30,12 +23,3 @@ const Nav = styled.nav`
   background: #eee;
   width: 100%;
 `
-/*
-.Navigation__active {
-  background: hotpink;
-}
-
-.Navigation__inactive {
-  background: #eee;
-}
-*/

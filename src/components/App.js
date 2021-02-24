@@ -13,9 +13,6 @@ export default function App() {
 
   return (
     <StyledApp>
-      <AppHeader>Carcassonne</AppHeader>
-      <GameForm />
-
       <PlayerForm onAddPlayer={handleAddPlayer} />
       {players.map(({ name, score }, index) => (
         <Player
@@ -30,7 +27,10 @@ export default function App() {
         <Button onClick={resetScores}>Reset scores</Button>
         <ResetButton onClick={resetAll}>Reset all</ResetButton>
       </Buttongrid>
+
+      <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
       <Button>End game</Button>
+      <AppHeader>Carcassonne</AppHeader>
       <HistoryEntry
         nameOfGame="Carcassonne"
         players={[
@@ -81,12 +81,13 @@ const StyledApp = styled.div`
   padding: 20px;
 `
 const ResetButton = styled(Button)`
-  background: white;
+  background: transparent;
   color: tomato;
   border: 1px solid tomato;
 `
 
 const Buttongrid = styled.div`
   display: grid;
+  gap: 5px;
   grid-template-columns: 1fr 1fr;
 `

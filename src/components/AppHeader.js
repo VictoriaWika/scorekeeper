@@ -5,5 +5,5 @@ export default styled.header`
   background: #eee;
   width: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
 `

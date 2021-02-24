@@ -4,12 +4,17 @@ import Input from './Input'
 export default function GameForm(onCreateGame) {
   return (
     <form onSubmit={handleSubmit}>
-      <Input labelText="Name of Game:" placeholderText="e.g. Carcassonne" />
       <Input
+        name="nameOfGame"
+        labelText="Name of Game:"
+        placeholderText="e.g. Carcassonne"
+      />
+      <Input
+        name="playerNames"
         labelText="Player names:"
         placeholderText="e.g. John Doe, Jane Doe"
       />
-      <Button text="Create game" />
+      <Button>Create Game</Button>
     </form>
   )
   function handleSubmit(event) {
