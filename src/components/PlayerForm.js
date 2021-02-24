@@ -1,10 +1,11 @@
 import styled from 'styled-components/macro'
 
-export default function PlayerForm({ text, onAddPlayer }) {
+export default function PlayerForm({ onAddPlayer }) {
   return (
     <Form onSubmit={handleSubmit}>
       <Label>
-        {text}
+        Add player:
+        <br />
         <Input name="player" placeholder="Player name" />
       </Label>
     </Form>

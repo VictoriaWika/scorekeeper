@@ -9,14 +9,14 @@ export default function App() {
 
   return (
     <StyledApp>
-      <PlayerForm onAddPlayer={addPlayer} text={'Add Player:'} />
-      {players.map(({ name, score, id }, index) => (
+      <PlayerForm onAddPlayer={handleAddPlayer} />
+      {players.map(({ name, score }, index) => (
         <Player
-          key={id}
+          key={name}
           name={name}
           score={score}
-          onMinus={() => onMinus(index)}
-          onPlus={() => onPlus(index)}
+          onMinus={() => handleMinus(index)}
+          onPlus={() => handlePlus(index)}
         />
       ))}
       <Buttongrid>
@@ -26,15 +26,11 @@ export default function App() {
     </StyledApp>
   )
 
-  function onPlus(index) {
-    setPlayers(players => [
-      ...players.slice(0, index),
-      { ...players[index], score: players[index].score + 1 },
-      ...players.slice(index + 1),
-    ])
+  function handleAddPlayer(name) {
+    setPlayers([...players, { name, score: 0, id: players.lenght + 1 }])
   }
 
-  function onMinus(index) {
+  function handleMinus(index) {
     setPlayers(players => [
       ...players.slice(0, index),
       { ...players[index], score: players[index].score - 1 },
@@ -42,8 +38,12 @@ export default function App() {
     ])
   }
 
-  function addPlayer(name) {
-    setPlayers([...players, { name, score: 0, id: players.lenght + 1 }])
+  function handlePlus(index) {
+    setPlayers(players => [
+      ...players.slice(0, index),
+      { ...players[index], score: players[index].score + 1 },
+      ...players.slice(index + 1),
+    ])
   }
 
   function resetScores() {
