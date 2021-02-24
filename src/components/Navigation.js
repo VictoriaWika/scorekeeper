@@ -1,5 +1,4 @@
 import Button from './Button'
-import './Navigation.css'
 import styled from 'styled-components/macro'
 
 export default function Navigation({ pages, activeIndex, onNavigate }) {

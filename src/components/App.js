@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <StyledApp>
-      <AppHeader title={'Carcassonne'} />
+      <AppHeader>Carcassonne</AppHeader>
       <GameForm />
 
       <PlayerForm onAddPlayer={handleAddPlayer} />

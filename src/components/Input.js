@@ -1,5 +1,3 @@
-import './Input.css'
-
 export default function Input({ labelText, placeholderText }) {
   return (
     <>
