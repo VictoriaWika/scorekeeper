@@ -6,23 +6,24 @@ import GameForm from './GameForm'
 import HistoryEntry from './HistoryEntry'
 import Navigation from './Navigation'
 import Player from './Player'
-import PlayerForm from './PlayerForm'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function App() {
   const [players, setPlayers] = useState([])
+  const [nameOfGame, setNameOfGame] = useState('')
   const [currentPage, setCurrentPage] = useState('play')
+  const [history, setHistory] = useState([])
 
   return (
     <StyledApp>
       {currentPage === 'play' && (
         <div>
-          <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
+          <GameForm onCreateGame={createGame} />
         </div>
       )}
       {currentPage === 'game' && (
-        <div>
-          <AppHeader>Carcassonne</AppHeader>
-          <PlayerForm onAddPlayer={handleAddPlayer} />
+        <GamePage>
+          <AppHeader>{nameOfGame}</AppHeader>
           {players.map(({ name, score }, index) => (
             <Player
               key={name}
@@ -32,23 +33,17 @@ export default function App() {
               onPlus={() => handlePlus(index)}
             />
           ))}
-          <Buttongrid>
-            <Button onClick={resetScores}>Reset scores</Button>
-            <ResetButton onClick={resetAll}>Reset all</ResetButton>
-          </Buttongrid>
-          <Button>End game</Button>
-        </div>
+
+          <Button onClick={resetScores}>Reset scores</Button>
+          <EndGame onClick={endGame}>End game</EndGame>
+        </GamePage>
       )}
       {currentPage === 'history' && (
-        <div>
-          <HistoryEntry
-            nameOfGame="Carcassonne"
-            players={[
-              { name: 'John Doe', score: '20' },
-              { name: 'Jane Doe', score: '30' },
-            ]}
-          />
-        </div>
+        <HistoryWrapper>
+          {history.map(({ nameOfGame, players, id }) => (
+            <HistoryEntry key={id} nameOfGame={nameOfGame} players={players} />
+          ))}
+        </HistoryWrapper>
       )}
 
       {(currentPage === 'play' || currentPage === 'history') && (
@@ -57,8 +52,11 @@ export default function App() {
     </StyledApp>
   )
 
-  function handleAddPlayer(name) {
-    setPlayers([...players, { name, score: 0, id: players.lenght + 1 }])
+  function createGame({ nameOfGame, playerNames }) {
+    // playerNames is ['Jane', 'John']
+    setNameOfGame(nameOfGame)
+    setPlayers(playerNames.map(name => ({ name, score: 0 })))
+    setCurrentPage('game')
   }
 
   function handleMinus(index) {
@@ -81,8 +79,11 @@ export default function App() {
     setPlayers(players.map(player => ({ ...player, score: 0 })))
   }
 
-  function resetAll() {
+  function endGame() {
+    setHistory([{ players, nameOfGame, id: uuidv4() }, ...history])
     setPlayers([])
+    setNameOfGame('')
+    setCurrentPage('play')
   }
 }
 
@@ -92,14 +93,17 @@ const StyledApp = styled.div`
   padding: 20px;
 `
 
-const ResetButton = styled(Button)`
+const GamePage = styled.div`
+  display: grid;
+  gap: 10px;
+`
+const EndGame = styled(Button)`
+  border: 2px solid tomato;
   background: transparent;
   color: tomato;
-  border: 1px solid tomato;
 `
 
-const Buttongrid = styled.div`
+const HistoryWrapper = styled.div`
   display: grid;
-  gap: 5px;
-  grid-template-columns: 1fr 1fr;
+  gap: 28px;
 `
