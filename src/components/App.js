@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
+import AppHeader from './AppHeader'
 import Button from './Button'
+import GameForm from './GameForm'
+import HistoryEntry from './HistoryEntry'
+import Navigation from './Navigation'
 import Player from './Player'
 import PlayerForm from './PlayerForm'
 
@@ -23,6 +27,22 @@ export default function App() {
         <Button onClick={resetScores}>Reset scores</Button>
         <ResetButton onClick={resetAll}>Reset all</ResetButton>
       </Buttongrid>
+      <Button>End game</Button>
+
+      <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
+      <AppHeader>Carcassonne</AppHeader>
+      <HistoryEntry
+        nameOfGame="Carcassonne"
+        players={[
+          { name: 'John Doe', score: '20' },
+          { name: 'Jane Doe', score: '30' },
+        ]}
+      />
+      <Navigation
+        onNavigate={index => console.log(index)}
+        activeIndex={0}
+        pages={['Play', 'History']}
+      />
     </StyledApp>
   )
 
@@ -61,12 +81,13 @@ const StyledApp = styled.div`
   padding: 20px;
 `
 const ResetButton = styled(Button)`
-  background: white;
+  background: transparent;
   color: tomato;
   border: 1px solid tomato;
 `
 
 const Buttongrid = styled.div`
   display: grid;
+  gap: 5px;
   grid-template-columns: 1fr 1fr;
 `
