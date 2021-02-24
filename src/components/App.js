@@ -10,39 +10,50 @@ import PlayerForm from './PlayerForm'
 
 export default function App() {
   const [players, setPlayers] = useState([])
+  const [currentPage, setCurrentPage] = useState('play')
 
   return (
     <StyledApp>
-      <PlayerForm onAddPlayer={handleAddPlayer} />
-      {players.map(({ name, score }, index) => (
-        <Player
-          key={name}
-          name={name}
-          score={score}
-          onMinus={() => handleMinus(index)}
-          onPlus={() => handlePlus(index)}
-        />
-      ))}
-      <Buttongrid>
-        <Button onClick={resetScores}>Reset scores</Button>
-        <ResetButton onClick={resetAll}>Reset all</ResetButton>
-      </Buttongrid>
-      <Button>End game</Button>
+      {currentPage === 'play' && (
+        <div>
+          <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
+        </div>
+      )}
+      {currentPage === 'game' && (
+        <div>
+          <AppHeader>Carcassonne</AppHeader>
+          <PlayerForm onAddPlayer={handleAddPlayer} />
+          {players.map(({ name, score }, index) => (
+            <Player
+              key={name}
+              name={name}
+              score={score}
+              onMinus={() => handleMinus(index)}
+              onPlus={() => handlePlus(index)}
+            />
+          ))}
+          <Buttongrid>
+            <Button onClick={resetScores}>Reset scores</Button>
+            <ResetButton onClick={resetAll}>Reset all</ResetButton>
+          </Buttongrid>
+          <Button>End game</Button>
+        </div>
+      )}
+      {currentPage === 'history' && (
+        <div>
+          <HistoryEntry
+            nameOfGame="Carcassonne"
+            players={[
+              { name: 'John Doe', score: '20' },
+              { name: 'Jane Doe', score: '30' },
+            ]}
+          />
+        </div>
+      )}
 
-      <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
-      <AppHeader>Carcassonne</AppHeader>
-      <HistoryEntry
-        nameOfGame="Carcassonne"
-        players={[
-          { name: 'John Doe', score: '20' },
-          { name: 'Jane Doe', score: '30' },
-        ]}
-      />
-      <Navigation
-        onNavigate={index => console.log(index)}
-        activeIndex={0}
-        pages={['Play', 'History']}
-      />
+      {(currentPage === 'play' || currentPage === 'history') && (
+        <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
+      )}
     </StyledApp>
   )
 
@@ -80,6 +91,7 @@ const StyledApp = styled.div`
   gap: 20px;
   padding: 20px;
 `
+
 const ResetButton = styled(Button)`
   background: transparent;
   color: tomato;

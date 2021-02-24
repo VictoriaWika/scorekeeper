@@ -4,26 +4,21 @@ export default function HistoryEntry({ nameOfGame, players }) {
   return (
     <HistoryWrapper>
       {nameOfGame}
-      <div>
-        {players.map((player, index) => (
-          <section key={index}>
-            <HistoryScores>
-              <span>{player.name}</span>
-              <span>{player.score}</span>
-            </HistoryScores>
-          </section>
-        ))}
-      </div>
+      {players.map((player, index) => (
+        <section key={index}>
+          <HistoryScores>
+            <span>{player.name}</span>
+            <span>{player.score}</span>
+          </HistoryScores>
+        </section>
+      ))}
     </HistoryWrapper>
   )
 }
 
 const HistoryWrapper = styled.section`
-  background: #eee;
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px;
-  padding-bottom: 20px;
+  display: grid;
+  gap: 10px;
 `
 
 const HistoryScores = styled.div`
