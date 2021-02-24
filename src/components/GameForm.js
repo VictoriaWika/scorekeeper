@@ -1,10 +1,9 @@
-import Button from '../Button'
-import Input from '../Input'
-import './GameForm.css'
+import Button from './Button'
+import Input from './Input'
 
 export default function GameForm(onCreateGame) {
   return (
-    <form onSubmit={handleSubmit} className="GameForm">
+    <form onSubmit={handleSubmit}>
       <Input labelText="Name of Game:" placeholderText="e.g. Carcassonne" />
       <Input
         labelText="Player names:"
@@ -26,3 +25,13 @@ export default function GameForm(onCreateGame) {
     nameOfGame.focus()
   }
 }
+
+/*
+.GameForm input {
+  margin: 5px 0;
+  border: 2px solid #bbb;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+}
+ */

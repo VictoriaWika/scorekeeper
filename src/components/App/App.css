@@ -1,9 +1,0 @@
-.App {
-  display: grid;
-  gap: 20px;
-  padding: 20px;
-}
-
-.App:first-child {
-  margin-top: 40px;
-}

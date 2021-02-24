@@ -1,10 +1,12 @@
+import Button from './Button'
 import './Navigation.css'
+import styled from 'styled-components/macro'
 
 export default function Navigation({ pages, activeIndex, onNavigate }) {
   return (
-    <nav className="Navigation">
+    <Nav>
       {pages.map((page, index) => (
-        <button
+        <Button
           key={page}
           className={
             index === activeIndex
@@ -14,8 +16,27 @@ export default function Navigation({ pages, activeIndex, onNavigate }) {
           onClick={() => onNavigate(index)}
         >
           {page}
-        </button>
+        </Button>
       ))}
-    </nav>
+    </Nav>
   )
 }
+
+const Nav = styled.nav`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #eee;
+  width: 100%;
+`
+/*
+.Navigation__active {
+  background: hotpink;
+}
+
+.Navigation__inactive {
+  background: #eee;
+}
+*/
