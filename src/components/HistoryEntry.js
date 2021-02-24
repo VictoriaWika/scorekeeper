@@ -3,12 +3,12 @@ import styled from 'styled-components/macro'
 export default function HistoryEntry({ nameOfGame, players }) {
   return (
     <HistoryWrapper>
-      {nameOfGame}
+      <GameEntry>{nameOfGame}</GameEntry>
       {players.map((player, index) => (
         <section key={index}>
           <HistoryScores>
-            <span>{player.name}</span>
-            <span>{player.score}</span>
+            <PlayerEntry>{player.name}</PlayerEntry>
+            <PlayerEntry>{player.score}</PlayerEntry>
           </HistoryScores>
         </section>
       ))}
@@ -24,4 +24,13 @@ const HistoryWrapper = styled.section`
 const HistoryScores = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+const GameEntry = styled.div`
+  background: #eee;
+  padding: 5px;
+`
+
+const PlayerEntry = styled.div`
+  padding: 0 5px;
 `
