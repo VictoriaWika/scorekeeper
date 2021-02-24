@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro'
 
 export default styled.button`
-  padding: 5px;
+  padding: 4px;
   background: #eee;
-  border: none;
+  border: 1px solid #eee;
   font-size: inherit;
 `

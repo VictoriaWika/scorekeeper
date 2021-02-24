@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export default function PlayerForm({ text, onAddPlayer }) {
   return (
@@ -22,7 +22,10 @@ export default function PlayerForm({ text, onAddPlayer }) {
 
 const Form = styled.form``
 
-const Label = styled.label``
+const Label = styled.label`
+  display: grid;
+  gap: 4px;
+`
 
 const Input = styled.input`
   border: 2px solid #bbb;

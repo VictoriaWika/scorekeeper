@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import styled from 'styled-components'
-import Button from '../Button'
-import Player from '../Player'
-import PlayerForm from '../PlayerForm'
+import styled from 'styled-components/macro'
+import Button from './Button'
+import Player from './Player'
+import PlayerForm from './PlayerForm'
 
 export default function App() {
   const [players, setPlayers] = useState([])
@@ -19,8 +19,10 @@ export default function App() {
           onPlus={() => onPlus(index)}
         />
       ))}
-      <Button onClick={resetScores}>Reset scores</Button>
-      <ResetButton onClick={resetAll}>Reset all</ResetButton>
+      <Buttongrid>
+        <Button onClick={resetScores}>Reset scores</Button>
+        <ResetButton onClick={resetAll}>Reset all</ResetButton>
+      </Buttongrid>
     </StyledApp>
   )
 
@@ -59,6 +61,12 @@ const StyledApp = styled.div`
   padding: 20px;
 `
 const ResetButton = styled(Button)`
-  background: #333;
-  color: white;
+  background: white;
+  color: tomato;
+  border: 1px solid tomato;
+`
+
+const Buttongrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `

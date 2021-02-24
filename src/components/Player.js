@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import Button from '../Button'
+import styled from 'styled-components/macro'
+import Button from './Button'
 
 export default function Player({ name, score, onMinus, onPlus }) {
   const hue = Math.min(score * 10, 120)
