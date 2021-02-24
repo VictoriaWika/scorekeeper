@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import AppHeader from './AppHeader'
+import Header from './Header'
 import Button from './Button'
 import Player from './Player'
 
@@ -13,7 +13,7 @@ export default function GamePage({
 }) {
   return (
     <GameWrapper>
-      <AppHeader>{nameOfGame}</AppHeader>
+      <Header>{nameOfGame}</Header>
       {players.map(({ name, score }, index) => (
         <Player
           key={name}
