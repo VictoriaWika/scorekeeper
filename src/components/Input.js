@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
-export default function Input({ labelText, placeholderText }) {
+export default function Input({ labelText, name, placeholderText }) {
   return (
     <label>
       {labelText}
-      <InputText placeholder={placeholderText} />
+      <InputText name={name} placeholder={placeholderText} />
     </label>
   )
 }
@@ -14,5 +14,4 @@ const InputText = styled.input`
   width: 100%;
   font-size: inherit;
   font-family: inherit;
-  margin: 5px 0;
 `

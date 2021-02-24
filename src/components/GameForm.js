@@ -1,9 +1,10 @@
+import styled from 'styled-components/macro'
 import Button from './Button'
 import Input from './Input'
 
-export default function GameForm(onCreateGame) {
+export default function GameForm({ onCreateGame }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Input
         name="nameOfGame"
         labelText="Name of Game:"
@@ -15,7 +16,7 @@ export default function GameForm(onCreateGame) {
         placeholderText="e.g. John Doe, Jane Doe"
       />
       <Button>Create Game</Button>
-    </form>
+    </Form>
   )
   function handleSubmit(event) {
     event.preventDefault()
@@ -31,12 +32,7 @@ export default function GameForm(onCreateGame) {
   }
 }
 
-/*
-.GameForm input {
-  margin: 5px 0;
-  border: 2px solid #bbb;
-  width: 100%;
-  font-size: inherit;
-  font-family: inherit;
-}
- */
+const Form = styled.form`
+  display: grid;
+  gap: 10px;
+`

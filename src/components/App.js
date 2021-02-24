@@ -27,9 +27,9 @@ export default function App() {
         <Button onClick={resetScores}>Reset scores</Button>
         <ResetButton onClick={resetAll}>Reset all</ResetButton>
       </Buttongrid>
+      <Button>End game</Button>
 
       <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
-      <Button>End game</Button>
       <AppHeader>Carcassonne</AppHeader>
       <HistoryEntry
         nameOfGame="Carcassonne"
