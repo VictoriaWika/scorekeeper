@@ -4,30 +4,30 @@ import { v4 as uuidv4 } from 'uuid'
 import GamePage from './GamePage'
 import HistoryPage from './HistoryPage'
 import Navigation from './Navigation'
-import PlayPage from './PlayPage'
+import CreatePage from './CreatePage'
 
 export default function App() {
   const [players, setPlayers] = useState([])
   const [nameOfGame, setNameOfGame] = useState('')
-  const [currentPage, setCurrentPage] = useState('play')
+  const [currentPage, setCurrentPage] = useState('create')
   const [history, setHistory] = useState([])
 
   return (
     <AppLayout>
-      {currentPage === 'play' && <PlayPage createGame={createGame} />}
+      {currentPage === 'create' && <CreatePage onCreateGame={createGame} />}
       {currentPage === 'game' && (
         <GamePage
           nameOfGame={nameOfGame}
           players={players}
-          handleMinus={handleMinus}
-          handlePlus={handlePlus}
-          resetScores={resetScores}
-          endGame={endGame}
+          onMinus={handleMinus}
+          onPlus={handlePlus}
+          onResetScores={resetScores}
+          onEndGame={endGame}
         />
       )}
       {currentPage === 'history' && <HistoryPage history={history} />}
 
-      {(currentPage === 'play' || currentPage === 'history') && (
+      {(currentPage === 'create' || currentPage === 'history') && (
         <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
       )}
     </AppLayout>
@@ -63,7 +63,7 @@ export default function App() {
     setHistory([{ players, nameOfGame, id: uuidv4() }, ...history])
     setPlayers([])
     setNameOfGame('')
-    setCurrentPage('play')
+    setCurrentPage('create')
   }
 }
 

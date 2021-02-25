@@ -5,8 +5,8 @@ export default function Navigation({ currentPage, onNavigate }) {
   return (
     <Nav>
       <Button
-        isActive={currentPage === 'play'}
-        onClick={() => onNavigate('play')}
+        isActive={currentPage === 'create'}
+        onClick={() => onNavigate('create')}
       >
         Play
       </Button>
